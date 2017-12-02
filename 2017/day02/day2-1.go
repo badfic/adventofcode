@@ -4,19 +4,39 @@ import (
     "fmt"
 	"strconv"
 	"strings"
+	"os"
+	"bufio"
+	"math"
 )
 
 func main() {
-    var input string
-    fmt.Scanln(&input)
+    file, _ := os.Open("./day2-1.dat")
+
+    defer file.Close()
 	
 	var checksum int
-	
-	fields := strings.Fields(input)
 
-	for _, field := range(fields) {
+    scanner := bufio.NewScanner(file)
+    for scanner.Scan() {		
+		min := math.MaxInt32
+		max := math.MinInt32
 		
-	}
+		fields := strings.Fields(scanner.Text())
+
+		for _, field := range fields {
+			intField, _ := strconv.Atoi(field)
+
+			if intField < min {
+				min = intField
+			}
+
+			if intField > max {
+				max = intField
+			}
+		}
+
+		checksum += max - min
+    }
 
     fmt.Println(checksum)
 }
