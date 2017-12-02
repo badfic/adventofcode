@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -18,24 +17,23 @@ func main() {
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		min := math.MaxInt32
-		max := math.MinInt32
-
 		fields := strings.Fields(scanner.Text())
 
-		for _, field := range fields {
-			intField, _ := strconv.Atoi(field)
+		for outerIdx, outer := range fields {
+			outerField, _ := strconv.Atoi(outer)
 
-			if intField < min {
-				min = intField
-			}
+			for innerIdx, inner := range fields {
+				if innerIdx == outerIdx {
+					continue
+				}
 
-			if intField > max {
-				max = intField
+				innerField, _ := strconv.Atoi(inner)
+
+				if outerField%innerField == 0 {
+					checksum += outerField / innerField
+				}
 			}
 		}
-
-		checksum += max - min
 	}
 
 	fmt.Println(checksum)
