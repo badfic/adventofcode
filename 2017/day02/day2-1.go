@@ -1,26 +1,26 @@
 package main
 
 import (
-    "fmt"
+	"bufio"
+	"fmt"
+	"math"
+	"os"
 	"strconv"
 	"strings"
-	"os"
-	"bufio"
-	"math"
 )
 
 func main() {
-    file, _ := os.Open("./day2-1.dat")
+	file, _ := os.Open("./day2-1.dat")
 
-    defer file.Close()
-	
+	defer file.Close()
+
 	var checksum int
 
-    scanner := bufio.NewScanner(file)
-    for scanner.Scan() {		
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
 		min := math.MaxInt32
 		max := math.MinInt32
-		
+
 		fields := strings.Fields(scanner.Text())
 
 		for _, field := range fields {
@@ -36,7 +36,7 @@ func main() {
 		}
 
 		checksum += max - min
-    }
+	}
 
-    fmt.Println(checksum)
+	fmt.Println(checksum)
 }

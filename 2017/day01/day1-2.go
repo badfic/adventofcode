@@ -1,23 +1,23 @@
 package main
 
 import (
-    "fmt"
+	"fmt"
 	"strconv"
 )
 
 func main() {
-    var input string
-    fmt.Scanln(&input)
+	var input string
+	fmt.Scanln(&input)
 
 	stepsForward := len(input) / 2
-    var total int
+	var total int
 
-    for i, r := range input {
-        c := string(r)
+	for i, r := range input {
+		c := string(r)
 		curr, _ := strconv.Atoi(c)
-		halfwayAroundIdx := i + stepsForward;
+		halfwayAroundIdx := i + stepsForward
 
-		if halfwayAroundIdx > len(input) - 1 {
+		if halfwayAroundIdx > len(input)-1 {
 			halfwayAroundIdx = halfwayAroundIdx - len(input)
 		}
 
@@ -26,6 +26,6 @@ func main() {
 			total += curr
 		}
 	}
-	
-    fmt.Println(total)
+
+	fmt.Println(total)
 }
